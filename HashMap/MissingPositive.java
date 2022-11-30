@@ -20,7 +20,7 @@ class MissingPositive
 				misPos=i;
 				break;
 			}
-		}
+		}		
 		return misPos;
 	}
 	private boolean isContain(int val)

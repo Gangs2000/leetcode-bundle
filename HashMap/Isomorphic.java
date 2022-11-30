@@ -17,11 +17,21 @@ class Isomorphic
 		{
 			if(isContain(string1.charAt(i)))
 			{
-				if(hm.get(string1.charAt(i))!=string2.charAt(i))
+				if(hm.get(string1.charAt(i))!=string2.charAt(i)){
 					flag=false;
+					break;
+				}
 			}
-			else
-				hm.put(string1.charAt(i),string2.charAt(i));
+			else if(!hm.containsValue(string2.charAt(i)))
+				hm.put(string1.charAt(i),string2.charAt(i));  
+            else{
+                if(hm.containsKey(string1.charAt(i)) && hm.get(string1.charAt(i))==string2.charAt(i))
+                    hm.put(string1.charAt(i),string2.charAt(i));
+                else{
+                    flag=false;
+                    break;
+                }
+            }				
 		}
 		String output=(flag)?("Both Strings are Isomorphic.."):("Both Strings are not Isomorphic..");
 		return output;

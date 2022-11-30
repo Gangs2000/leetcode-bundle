@@ -23,6 +23,6 @@ public class UniqueChar {
         catch(Exception e){
             System.out.println("Exception occured : "+e.getMessage());
             e.printStackTrace();
-        }
+        }              
     }
 }
