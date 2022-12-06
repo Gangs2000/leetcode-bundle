@@ -20,41 +20,29 @@ public class IntegerToRoman {
     }
     public String intToRoman(int num) {
         if(num!=0){
-            if(String.valueOf(num).charAt(0)=='9'){
+            if(String.valueOf(num).charAt(0)=='9' || String.valueOf(num).charAt(0)=='4'){
+                int minus=0;
                 if(String.valueOf(num).length()==3){
-                    romanValue+="CM";
-                    this.intToRoman(num-900);
+                    romanValue+=(String.valueOf(num).charAt(0)=='9')?("CM"):("CD");
+                    minus=(String.valueOf(num).charAt(0)=='9')?(900):(400);                    
                 }
                 else if(String.valueOf(num).length()==2){
-                    romanValue+="XC";
-                    this.intToRoman(num-90);
+                    romanValue+=(String.valueOf(num).charAt(0)=='9')?("XC"):("XL");
+                    minus=(String.valueOf(num).charAt(0)=='9')?(90):(40);                    
                 }   
                 else if(String.valueOf(num).length()==1){
-                    romanValue+="IX";
-                    this.intToRoman(num-9);
-                }             
-            }
-            else if(String.valueOf(num).charAt(0)=='4'){
-                if(String.valueOf(num).length()==3){
-                    romanValue+="CD";
-                    this.intToRoman(num-400);
-                }
-                else if(String.valueOf(num).length()==2){
-                    romanValue+="XL";
-                    this.intToRoman(num-40);
-                }   
-                else if(String.valueOf(num).length()==1){
-                    romanValue+="IV";
-                    this.intToRoman(num-4);
-                }
-            }
+                    romanValue+=(String.valueOf(num).charAt(0)=='9')?("IX"):("IV");
+                    minus=(String.valueOf(num).charAt(0)=='9')?(9):(4);                    
+                }  
+                num-=minus;     
+            }            
             else{                
                 this.getKeyAndValue(num);                   //Calling method to get key and value whose value is lower than current number
                 romanValue+=key;                
                 num-=value;                
-                key=""; value=0;      
-                this.intToRoman(num);                       //Recursive function call
+                key=""; value=0;                      
             }
+            this.intToRoman(num);                           //Recursive function call
         }
         return romanValue;
     }

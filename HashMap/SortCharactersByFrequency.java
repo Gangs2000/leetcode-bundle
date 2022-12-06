@@ -10,12 +10,8 @@ public class SortCharactersByFrequency {
         wordMapper=new LinkedHashMap<>();
     }
     public String frequencySort(String s) {
-        for(int i=0;i<s.length();i++){
-            if(wordMapper.containsKey(s.charAt(i)))
-                wordMapper.put(s.charAt(i), wordMapper.get(s.charAt(i))+1);
-            else
-                wordMapper.put(s.charAt(i), 1);
-        }                          
+        for(int i=0;i<s.length();i++)
+            wordMapper.put(s.charAt(i), wordMapper.getOrDefault(s.charAt(i), 0)+1);                                            
         TreeMap<Integer, String> resultMap=new TreeMap<>();      
         for(Map.Entry<Character,Integer> entry : wordMapper.entrySet()){
             if(resultMap.containsKey(entry.getValue()))
