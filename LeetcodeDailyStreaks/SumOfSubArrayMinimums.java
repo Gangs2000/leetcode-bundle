@@ -20,7 +20,7 @@ public class SumOfSubArrayMinimums {
             for(int j=i;j<listOfNumbers.size();j++){                
                 sum+=listOfNumbers.subList(i, j+1).stream().min(Integer::compareTo).get();
             }
-        }        
+        }                                
         return sum;
     }
     public void convertNumArrayToList(int[] arr){

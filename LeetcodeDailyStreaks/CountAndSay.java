@@ -38,7 +38,7 @@ public class CountAndSay {
             sc=new Scanner(System.in);
             System.out.println("Enter how many times to count and say : ");            
             int count=sc.nextInt();
-            System.out.println(new CountAndSay().countAndSay(count));
+            System.out.println(new CountAndSay().countAndSay(count));            
         }
         catch(Exception e){
             System.out.println("Exception occured : "+e.getMessage());

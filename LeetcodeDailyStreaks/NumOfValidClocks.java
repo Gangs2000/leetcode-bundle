@@ -26,7 +26,7 @@ public class NumOfValidClocks {
             sc=new Scanner(System.in);
             System.out.println("Enter a time between 00:00 - 23:59 to find out number of valid clocks : ");
             String clock=sc.nextLine();
-            System.out.println(new NumOfValidClocks().countTime(clock));
+            System.out.println(new NumOfValidClocks().countTime(clock));            
         }
         catch(Exception e){
             System.out.println("Exception occured : "+e.getMessage());
