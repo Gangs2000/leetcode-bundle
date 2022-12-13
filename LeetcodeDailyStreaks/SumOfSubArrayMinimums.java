@@ -13,14 +13,14 @@ public class SumOfSubArrayMinimums {
         sum=0;
         listOfNumbers=new LinkedList<>();
     }
-    public int sumSubarrayMins(int[] arr) {
+    public int sumSubarrayMins(int[] arr) {        
         //Calling this method to convert an array to List
         this.convertNumArrayToList(arr);
         for(int i=0;i<listOfNumbers.size();i++){
             for(int j=i;j<listOfNumbers.size();j++){                
                 sum+=listOfNumbers.subList(i, j+1).stream().min(Integer::compareTo).get();
             }
-        }                                
+        }                            
         return sum;
     }
     public void convertNumArrayToList(int[] arr){

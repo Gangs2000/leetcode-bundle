@@ -27,7 +27,7 @@ public class MinimumGeneticMutation {
         else{
             queue.put(startGene, 0);                        
             while(queue.size()!=0){                            
-                String gene=queue.entrySet().stream().findFirst().get().getKey();
+                String gene=queue.entrySet().stream().findFirst().get().getKey();                
                 value=queue.get(gene)+1;
                 this.searchValidGenes(gene, endGene);                
                 queue.remove(gene);
