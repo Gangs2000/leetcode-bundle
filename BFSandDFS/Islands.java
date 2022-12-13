@@ -32,7 +32,7 @@ class Islands
             if(grid[x][y]==1)
             {
                 grid[x][y]=2;
-                directions(x,y,grid);    //Recursion to mark all directions as visitedd
+                directions(x,y,grid);    //Recursion to mark all directions as visited
             }
         }
     }
