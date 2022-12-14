@@ -16,8 +16,7 @@ public class ReverseVowelsOfAString {
                 leftPointer=i;
                 while(rightPointer>i){
                     if(vowels.contains(strBuilder.charAt(rightPointer))){                               
-                        if(strBuilder.charAt(leftPointer)!=strBuilder.charAt(rightPointer)){               
-                            System.out.println(leftPointer+" "+rightPointer+" "+strBuilder.charAt(leftPointer)+" "+strBuilder.charAt(rightPointer));  
+                        if(strBuilder.charAt(leftPointer)!=strBuilder.charAt(rightPointer)){                                           
                             char tempChar=strBuilder.charAt(rightPointer);
                             strBuilder.setCharAt(rightPointer, strBuilder.charAt(leftPointer));
                             strBuilder.setCharAt(leftPointer, tempChar);                                  
@@ -36,7 +35,7 @@ public class ReverseVowelsOfAString {
         try{
             sc=new Scanner(System.in);
             System.out.println("Enter a String to reverse all vowels : ");
-            String string=sc.nextLine();
+            String string=sc.nextLine();                                    
             System.out.println(new ReverseVowelsOfAString().reverseVowels(string));
         }
         catch(Exception e){
