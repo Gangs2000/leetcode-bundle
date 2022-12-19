@@ -19,7 +19,7 @@ public class MaximumNestingDepthOfParanthesis {
                 else{
                     if(push>depth)
                         depth=push;
-                    stack.pop();                        
+                    stack.pop();      
                     push--;
                 }
             }
