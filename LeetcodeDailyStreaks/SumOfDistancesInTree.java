@@ -62,7 +62,7 @@ public class SumOfDistancesInTree {
                 edges[i][0]=sc.nextInt();
                 edges[i][1]=sc.nextInt();
             }
-            System.out.println(new SumOfDistancesInTree().sumOfDistancesInTree(length, edges));
+            System.out.println(new SumOfDistancesInTree().sumOfDistancesInTree(n, edges));
         }
         catch(Exception e){
             System.out.println("Exception occured : "+e.getMessage());

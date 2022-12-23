@@ -1,52 +1,55 @@
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 public class WordLadder {
-    int depth=0,lsize=1;
-    List<String> list=new LinkedList<>();
-    private int findMinimumTransformation(String beginWord,String endWord,List<String> wordList){
-        list.add(beginWord);
-        if(!wordList.contains(endWord))
-            return depth;
-        else{
-            boolean flag=false;
-            while(true){
-                for(int i=0;i<list.get(0).length();i++){
-                    StringBuilder word=new StringBuilder(list.get(0));
-                    for(char lowercase='a';lowercase<='z';lowercase++){
-                        word.setCharAt(i, lowercase);
-                        if(word.length()==1 && !new String(word).equals(endWord) && !list.get(0).equals(new String(word))){
-                            depth++;
-                            list.add(new String(word));
-                            wordList.remove(new String(word));
-                        }
-                        else if(new String(word).equals(endWord)){
-                            list.add(new String(word));
-                            if(!(word.length()==1))
-                                depth++;
-                            flag=true;
-                            break;
-                        }
-                        else if(wordList.contains(new String(word)) && !list.get(0).equals(new String(word))){
-                            list.add(new String(word));
-                            wordList.remove(new String(word));
-                        }
-                    }
+    Map<String, Integer> queue;
+    List<String> visitedWords;
+    int result=0;
+    public WordLadder(){
+        queue=new LinkedHashMap<>();
+        visitedWords=new LinkedList<>();
+    }
+    public int ladderLength(String beginWord, String endWord, List<String> wordList) {
+        if(wordList.contains(endWord)){
+            if(beginWord.equals(endWord))
+                return 0;
+            else{
+                queue.put(beginWord, 1);                    //Adding begin word into queue
+                if(wordList.contains(beginWord))
+                    wordList.remove(beginWord);             //Delete from list, If begin word exists in wordlist
+                while(!queue.isEmpty()){
+                    String poll=queue.entrySet().stream().findFirst().get().getKey();
+                    int currentDepth=queue.get(poll);
+                    this.traverseGraphToFindShorestPath(poll, currentDepth, endWord, wordList);                    
+                    queue.remove(poll);
                 }
-                if(flag)
-                    break;
-                if(list.size()==1 && list.size()==lsize){
-                    depth=-1;
-                    break;
-                }
-                lsize--; list.remove(0);
-                if(lsize==0){
-                    depth++;
-                    lsize=list.size();
-                }
+                return result;
             }
-            return depth+1;
+        }
+        else
+            return 0;        
+    }
+    public void traverseGraphToFindShorestPath(String string, int depth, String endWord, List<String> wordList){        
+        if(string.equals(endWord))
+            result=depth;
+        else{
+            for(int i=0;i<wordList.size();i++){     
+                String listString=wordList.get(i);       
+                if(string.length()==listString.length()){                
+                    int letterDifference=0; 
+                    for(int letter=0;letter<listString.length();letter++){
+                        if(string.charAt(letter)!=listString.charAt(letter))
+                            letterDifference++;
+                    }
+                    if(letterDifference==1 && !visitedWords.contains(listString)){
+                        queue.put(listString, depth+1);
+                        visitedWords.add(listString);
+                    }                       
+                }                                
+            }            
         }
     }
     public static void main(String[] args){
@@ -63,7 +66,7 @@ public class WordLadder {
             int length=sc.nextInt();
             for(int i=0;i<length;i++)
                 wordList.add(sc.next().toLowerCase());
-            System.out.println(new WordLadder().findMinimumTransformation(beginWord,endWord,wordList));
+            System.out.println(new WordLadder().ladderLength(beginWord,endWord,wordList));
         }
         catch(Exception e){
             System.out.println("Exception occured : "+e.getMessage());
