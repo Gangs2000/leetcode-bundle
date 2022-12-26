@@ -3,28 +3,23 @@ package LeetcodeDailyStreaks;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class SumOfSubArrayMinimums {
-    List<Integer> listOfNumbers;
-    int sum;
-    public SumOfSubArrayMinimums(){
-        sum=0;
-        listOfNumbers=new LinkedList<>();
+    int sumOfSubArraySums=0;
+    public int sumSubarrayMins(int[] arr) {
+        List<Integer> list=new LinkedList<>();
+        this.findSubSequence(0, arr.length, arr, list);
+        return sumOfSubArraySums;
     }
-    public int sumSubarrayMins(int[] arr) {        
-        //Calling this method to convert an array to List
-        this.convertNumArrayToList(arr);
-        for(int i=0;i<listOfNumbers.size();i++){
-            for(int j=i;j<listOfNumbers.size();j++){                
-                sum+=listOfNumbers.subList(i, j+1).stream().min(Integer::compareTo).get();
-            }
-        }                            
-        return sum;
-    }
-    public void convertNumArrayToList(int[] arr){
-        listOfNumbers=IntStream.of(arr).boxed().collect(Collectors.toList());
+    public void findSubSequence(int index, int boundCondition, int[] arr, List<Integer> list){
+        if(index==boundCondition){
+            System.out.println(list);
+            return;
+        }
+        list.add(arr[index]);
+        this.findSubSequence(index+1, boundCondition, arr, list);
+        list.remove(list.size()-1);
+        this.findSubSequence(index+1, boundCondition, arr, list);
     }
     public static void main(String[] args){
         Scanner sc;
