@@ -3,13 +3,21 @@ package LeetcodeDailyStreaks;
 import java.util.Scanner;
 
 public class JumpGame {
-    public boolean canJump(int[] nums) {
-        int index=nums.length-1;
-        for(int i=nums.length-2;i>=0;i--){
-            if(nums[i]+i>=index)
-                index=i;
-        }
-        return index==0;
+    int cache[];
+    public boolean canJump(int[] nums) {        
+        cache=new int[10001];
+        return (isReachableToLastIndex(0, nums)==1)?(true):(false);
+    }
+    public int isReachableToLastIndex(int index, int[] nums){
+        if(index==nums.length-1 || index>=nums.length)
+            return 1;
+        if(cache[index]!=0)
+            return cache[index];
+        for(int i=1;i<=nums[index];i++){
+            if(isReachableToLastIndex(index+i, nums)==1)                
+                return cache[index]=1;
+        }        
+        return cache[index]=2;
     }
     public static void main(String[] args){
         Scanner sc;
