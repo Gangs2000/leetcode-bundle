@@ -13,9 +13,8 @@ public class CombinationSum {
     }
     public void findAllCombinations(int index, int target, int[] candidates, List<Integer> list){
         if(index==candidates.length){
-            if(target==0){                                    
+            if(target==0)                                
                 output.add(new LinkedList<>(list));               
-            }
             return;
         }
         if(target==0){                               
