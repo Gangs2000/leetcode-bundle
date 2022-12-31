@@ -1,5 +1,4 @@
 import package1.List_temp;
-import java.util.LinkedList;
 class Circular_linked extends List_temp
 {
 	int rear=-1,front=-1,length;
