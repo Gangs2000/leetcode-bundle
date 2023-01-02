@@ -1,26 +1,33 @@
 package LeetcodeDailyStreaks;
 
-import java.util.List;
-import java.util.LinkedList;
 import java.util.Scanner;
-
+import java.util.Stack;
 public class LongestRectangleInHistogram {
-    List<Integer> list;
-    int largestRectangleArea=0;    
+    int maxHistogram=0, position=0;
+    Stack<Integer> elementStack, positionStack;
     public LongestRectangleInHistogram(){
-        list=new LinkedList<>();
-    }    
+        elementStack=new Stack<>();
+        positionStack=new Stack<>();
+    }
     public int largestRectangleArea(int[] heights) {
-        for(int i=0;i<heights.length;i++){
-            for(int j=i;j<heights.length;j++){
-                list.add(heights[j]);
-                int currentValue=(list.stream().min(Integer::compareTo).get())*list.size();
-                if(currentValue>largestRectangleArea)
-                    largestRectangleArea=currentValue;
-            }                          
-            list.clear();
+        for(int i=0;i<heights.length;i++){                          
+            if(!elementStack.empty()){
+                if(elementStack.peek()>heights[i]){                                        
+                    while(!elementStack.empty()){
+                        if(elementStack.peek()>heights[i]){
+                            maxHistogram=Math.max(maxHistogram, elementStack.pop()*(i-positionStack.pop()));
+                            position--;
+                        }
+                        else
+                            break;
+                    }                    
+                }                
+            }  
+            elementStack.push(heights[i]);
+            positionStack.push(position);
+            position++;
         }
-        return largestRectangleArea;   
+        return maxHistogram;
     }        
     public static void main(String[] args){
         Scanner sc;
