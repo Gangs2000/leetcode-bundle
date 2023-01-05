@@ -1,18 +1,13 @@
 package LeetcodeDailyStreaks;
 
 import java.util.Comparator;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Arrays;
 
 public class MinimumNumberOfArrowsToBurstBalloons {
     int minimumCount=1;
-    List<Integer> prev, curr;
-    public MinimumNumberOfArrowsToBurstBalloons(){
-        prev=new LinkedList<>();
-        curr=new LinkedList<>();
-    }
+    List<Integer> prev, curr;    
     public int findMinArrowShots(int[][] points) {
         Comparator<int[]> comparator=new Comparator<int[]>() {
             @Override
