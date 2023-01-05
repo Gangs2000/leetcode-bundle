@@ -32,12 +32,12 @@ public class WordLadder {
         else
             return 0;        
     }
-    public void traverseGraphToFindShorestPath(String string, int depth, String endWord, List<String> wordList){        
+    public void traverseGraphToFindShorestPath(String string, int depth, String endWord, List<String> wordList){                 
         if(string.equals(endWord))
             result=depth;
         else{
             for(int i=0;i<wordList.size();i++){     
-                String listString=wordList.get(i);       
+                String listString=wordList.get(i);                       
                 if(string.length()==listString.length()){                
                     int letterDifference=0; 
                     for(int letter=0;letter<listString.length();letter++){
