@@ -1,56 +1,60 @@
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
-import FunctionalInterface.Function;
 
 public class MergeIntervals {
-    private static List<List<Integer>> sortIntervals(List<List<Integer>> intervals){
-        for(int i=0;i<intervals.size()-1;i++){
-            for(int j=i+1;j<intervals.size();j++){
-                if(intervals.get(i).get(0)>intervals.get(j).get(0)){
-                    List<Integer> tempList=intervals.get(i);
-                    intervals.set(i, intervals.get(j));
-                    intervals.set(j, tempList);                    
-                }                
+    List<List<Integer>> resultList=new LinkedList<>();
+    int[][] result;
+    public int[][] merge(int[][] intervals) {
+        if(intervals.length==1)
+            return intervals;
+        //Sorting array elements by ascending order..
+        Arrays.sort(intervals, new Comparator<int[]>() {
+            @Override
+            public int compare(int[] o1, int[] o2) {
+                return Integer.compare(o1[0], o2[0]);
             }
-        }
-        return intervals;
-    }
-    private static List<List<Integer>> mergeOverLappedIntervals(List<List<Integer>> sortedIntervals){
-        List<List<Integer>> mergedIntervals=new LinkedList<>();
-        for(int i=0;i<sortedIntervals.size();i++){
-            if(mergedIntervals.size()==0)
-                mergedIntervals.add(sortedIntervals.get(i));
-            else {
-                List<Integer> nonOverLappedList=new LinkedList<>();                               
-                if(sortedIntervals.get(i).get(0)<=mergedIntervals.get(mergedIntervals.size()-1).get(1)){  //Retrieving last indexed list to compare values with current list
-                    nonOverLappedList.add(mergedIntervals.get(mergedIntervals.size()-1).get(0));
-                    nonOverLappedList.add(sortedIntervals.get(i).get(1));
-                    mergedIntervals.set(mergedIntervals.size()-1, nonOverLappedList);
+        });
+        for(int i=0;i<intervals.length-1;i++){
+            if(intervals[i][1]>=intervals[i+1][0]){
+                int minElement=Math.min(intervals[i][0], intervals[i+1][0]);
+                int maxElement=Math.max(intervals[i][1], intervals[i+1][1]);
+                intervals[i+1][0]=minElement;
+                intervals[i+1][1]=maxElement;     
+                if(i==intervals.length-2)
+                    resultList.add(List.of(intervals[i+1][0], intervals[i+1][1]));
+            }
+            else{
+                if(i==intervals.length-2){
+                    resultList.add(List.of(intervals[i][0], intervals[i][1]));
+                    resultList.add(List.of(intervals[i+1][0], intervals[i+1][1]));
                 }
-                else 
-                    mergedIntervals.add(sortedIntervals.get(i));
-            }
+                else
+                    resultList.add(List.of(intervals[i][0], intervals[i][1]));
+            }   
+        }        
+        result=new int[resultList.size()][2];
+        for(int i=0;i<result.length;i++){
+            result[i][0]=resultList.get(i).get(0);
+            result[i][1]=resultList.get(i).get(1);
         }
-        return mergedIntervals;
-    }
+        return result;
+    }    
     public static void main(String[] args){
         Scanner sc;
-        List<List<Integer>> intervals;
-        Function<List<List<Integer>>,List<List<Integer>>> sortList, mergeList;
+        int[][] intervals;        
         try{
-            sc=new Scanner(System.in);
-            intervals=new LinkedList<>();
-            System.out.println("Enter length of the list : ");
+            sc=new Scanner(System.in);            
+            System.out.println("Enter length of intervals array : ");
             int length=sc.nextInt();
+            intervals=new int[length][2];
             for(int i=0;i<length;i++){
-                List<Integer> addList=new LinkedList<>();
-                addList.add(sc.nextInt()); addList.add(sc.nextInt());
-                intervals.add(addList);          
-            }
-            sortList=MergeIntervals::sortIntervals;
-            mergeList=MergeIntervals::mergeOverLappedIntervals;
-            System.out.println("Non Overlapped list : "+mergeList.apply(sortList.apply(intervals)));              //First Calling method to sort starting point of intervals and then invoked merge list method to merge overlapped intervals         
+                intervals[i][0]=sc.nextInt();
+                intervals[i][1]=sc.nextInt();
+            }          
+            System.out.println(new MergeIntervals().merge(intervals));              
         }
         catch(Exception e){
             System.out.println("Exception occured : "+e.getMessage());
