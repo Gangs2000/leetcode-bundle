@@ -1,53 +1,27 @@
-package Recursion;
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class MaxSubArray {
-    int maxValue=0,output=0;
-    private int maxSubArray(List<Integer> list,int beginIndex,int endIndex){
-        if(endIndex==-1 || endIndex==list.size())
-            output=maxValue;
-        else{
-            List<Integer> uniqueList=new ArrayList<>();
-            boolean flag=true;
-            for(int i=beginIndex;i<=endIndex;i++){
-                if(uniqueList.contains(list.get(i))){
-                    flag=false;
-                    break;
-                }
-                else    
-                    uniqueList.add(list.get(i));
-            }
-            if(flag){
-                int sum=uniqueList.stream().reduce(0, (a,b)->a+b);
-                maxValue=(sum>maxValue)?(sum):(maxValue);
-                endIndex++;
-                maxSubArray(list, beginIndex, endIndex);
-            }
-            else
-                maxSubArray(list, beginIndex, -1);
+    //Kadane's algorithm
+    public int maxSubArray(int[] nums) {
+        int sum=nums[0];
+        int maxSum=nums[0];
+        for(int i=1;i<nums.length;i++){
+            sum=Math.max(sum+nums[i], nums[i]);
+            maxSum=Math.max(maxSum, sum);
         }
-        return output;
+        return maxSum;
     } 
     public static void main(String[] args){
         Scanner sc;
-        List<Integer> list;
-        int maxSubArraySum=0;
+        int[] nums;
         try{
-            sc=new Scanner(System.in);
-            list=new ArrayList<>();
+            sc=new Scanner(System.in);           
             System.out.println("Enter the length of an array list : ");
             int length=sc.nextInt();
+            nums=new int[length];
             for(int i=0;i<length;i++)
-                list.add(sc.nextInt());
-            for(int i=0;i<list.size();i++){
-                int element=new MaxSubArray().maxSubArray(list, i, i);
-                if(element>maxSubArraySum)
-                    maxSubArraySum=element;
-            }
-            System.out.println("Max Sub Array Sum is "+maxSubArraySum);
+                nums[i]=sc.nextInt();            
+            System.out.println("Max Sub Array Sum is "+new MaxSubArray().maxSubArray(nums));
         }
         catch(Exception e){
             System.out.println("Exception occured : "+e.getMessage());
