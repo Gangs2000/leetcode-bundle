@@ -32,7 +32,7 @@ public class NQueens {
         row=copyRow;
         column=copyColumn;
         //Lower diagonal checking
-        while(row<board.length && column>=0){            
+        while(row<=board.length-1 && column>=0){            
             if(board[row][column]=='Q')
                 return false;
             row++;
