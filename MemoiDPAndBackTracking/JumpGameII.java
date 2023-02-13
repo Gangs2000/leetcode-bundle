@@ -3,17 +3,20 @@ package MemoiDPAndBackTracking;
 import java.util.Scanner;
 
 public class JumpGameII {    
+    int[] cache;    
     public int jump(int[] nums) {           
-        return isReachableWithMinDepth(0, nums, 0);
+        cache=new int[nums.length];        
+        return isReachableWithMinDepth(0, nums, cache);
     }
-    public int isReachableWithMinDepth(int index, int[] nums, int depth){
-        if(index==nums.length-1 || index>=nums.length)                                     
-            return depth;        
-        int minDepth=Integer.MAX_VALUE;
-        for(int i=1;i<=nums[index];i++){
-            int currentDepth=isReachableWithMinDepth(index+i, nums, depth+1);
-            minDepth=Math.min(minDepth, currentDepth);
-        }
+    public int isReachableWithMinDepth(int index, int[] nums, int[] cache){
+        if(index>=nums.length-1)
+            return 0;
+        if(cache[index]!=0)
+            return cache[index];
+        int minDepth=10001;
+        for(int i=index+1;i<=nums[index]+index;i++)            
+            minDepth=Math.min(minDepth, 1+isReachableWithMinDepth(i, nums, cache));
+        cache[index]=minDepth;
         return minDepth;
     }
     public static void main(String[] args){
