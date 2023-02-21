@@ -6,11 +6,11 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class AddToArrayFormOfInteger {
-    List<Integer> result;    
+    List<Integer> result;        
     public AddToArrayFormOfInteger(){
         result=new LinkedList<>();
     }
-    public List<Integer> addToArrayForm(int[] num, int k) {
+    public List<Integer> addToArrayForm(int[] num, int k) {        
         int index=num.length-1;
         while(index>=0 || k>0){
             if(index>=0){
