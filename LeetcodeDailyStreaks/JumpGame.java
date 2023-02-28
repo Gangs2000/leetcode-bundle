@@ -24,7 +24,7 @@ public class JumpGame {
         try{
             sc=new Scanner(System.in);
             System.out.println("Enter length of an array : ");
-            int length=sc.nextInt();
+            int length=sc.nextInt();            
             int[] nums=new int[length];
             for(int i=0;i<length;i++)
                 nums[i]=sc.nextInt();
