@@ -11,7 +11,7 @@ public class SubDomainVisitCount {
         result=new LinkedList<>();
         countVisitedDomains=new HashMap<>();
     }
-    public List<String> subdomainVisits(String[] cpdomains) {
+    public List<String> subdomainVisits(String[] cpdomains) {        
         for(int i=0;i<cpdomains.length;i++){
             String[] splitSpace=cpdomains[i].split(" ");            
             char[] chars=splitSpace[1].toCharArray();
