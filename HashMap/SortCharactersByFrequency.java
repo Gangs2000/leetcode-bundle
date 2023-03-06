@@ -9,7 +9,7 @@ public class SortCharactersByFrequency {
     public SortCharactersByFrequency(){
         wordMapper=new LinkedHashMap<>();
     }
-    public String frequencySort(String s) {
+    public String frequencySort(String s) {        
         for(int i=0;i<s.length();i++)
             wordMapper.put(s.charAt(i), wordMapper.getOrDefault(s.charAt(i), 0)+1);                                            
         TreeMap<Integer, String> resultMap=new TreeMap<>();      

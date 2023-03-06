@@ -32,7 +32,7 @@ class Isomorphic
                     break;
                 }
             }				
-		}
+		}		
 		String output=(flag)?("Both Strings are Isomorphic.."):("Both Strings are not Isomorphic..");
 		return output;
 	}
