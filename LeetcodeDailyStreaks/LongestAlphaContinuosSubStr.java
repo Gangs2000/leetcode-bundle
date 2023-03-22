@@ -15,7 +15,7 @@ public class LongestAlphaContinuosSubStr {
                 countSequence=1;
             }
         }        
-        return (countSequence==1)?(longestSequence):(Math.max(longestSequence, countSequence));
+        return Math.max(longestSequence, countSequence);
     }
     public static void main(String[] args){
         Scanner sc;
