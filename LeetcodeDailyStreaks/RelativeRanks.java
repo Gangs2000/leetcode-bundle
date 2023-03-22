@@ -10,7 +10,7 @@ public class RelativeRanks {
     String[] result;
     int position=0;
     PriorityQueue<List<Integer>> priorityQueue;
-    public RelativeRanks(){        
+    public RelativeRanks(){                
         priorityQueue=new PriorityQueue<>(new Comparator<List<Integer>>() {
             @Override
             public int compare(List<Integer> list1, List<Integer> list2) {                

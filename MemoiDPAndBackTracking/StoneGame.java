@@ -26,7 +26,7 @@ public class StoneGame {
             else{
                 valueToBeReturned=piles[right];
                 righPointer--;
-            }               
+            }                           
         }
         else{
             if(piles[left]<piles[right]){

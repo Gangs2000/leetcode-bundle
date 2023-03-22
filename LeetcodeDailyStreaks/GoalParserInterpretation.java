@@ -3,8 +3,8 @@ package LeetcodeDailyStreaks;
 import java.util.Scanner;
 
 public class GoalParserInterpretation {
-    String parser="";    
-    public String interpret(String command) {
+    String parser="";        
+    public String interpret(String command) {        
         for(int i=0;i<command.length();i++){
             if(command.charAt(i)=='(' && command.charAt(i+1)==')')
                 parser+='o';
@@ -12,7 +12,7 @@ public class GoalParserInterpretation {
                 parser+="al";            
             else if(command.charAt(i)!='(' && command.charAt(i)!=')')
                 parser+=command.charAt(i);            
-        }
+        }        
         return parser;
     }
     public static void main(String[] args){
