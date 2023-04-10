@@ -15,7 +15,7 @@ public class SeggregateLists {
         list3=new LinkedList<>();
     }
     public void separateNumsAndStoreIntoLists(int[] nums){        
-        List<Integer> numsList=Arrays.stream(nums).boxed().collect(Collectors.toList());
+        List<Integer> numsList=Arrays.stream(nums).boxed().collect(Collectors.toList());        
         for(int i=0;i<nums.length;i=i+3){    
             if(listIteration==4)
                 listIteration=1;          
