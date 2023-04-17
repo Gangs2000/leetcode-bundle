@@ -10,25 +10,14 @@ public class LongestPalindromicSubSequence {
         return longestPalindromicCount;
     }
     public void findAllSubSequences(int index, StringBuilder stringBuilder, String originalString){
-        if(index==originalString.length()){
-            if(stringBuilder.length()!=0){
-                if(isPalindromic(stringBuilder.toString()))
-                    longestPalindromicCount=Math.max(longestPalindromicCount, stringBuilder.length());
-            }
-            return ;
-        }
-        stringBuilder.append(originalString.charAt(index));
+        if(index==originalString.length())            
+            return ;            
+        System.out.println(stringBuilder+" "+stringBuilder.reverse()+" "+stringBuilder.toString().equals(stringBuilder.reverse().toString()));
+        stringBuilder.append(originalString.charAt(index));        
+        findAllSubSequences(index+1, stringBuilder, originalString);        
+        stringBuilder.deleteCharAt(stringBuilder.length()-1);        
         findAllSubSequences(index+1, stringBuilder, originalString);
-        stringBuilder.deleteCharAt(stringBuilder.length()-1);
-        findAllSubSequences(index+1, stringBuilder, originalString);
-    }
-    public boolean isPalindromic(String string){
-        for(int i=0;i<string.length()/2;i++){
-            if(string.charAt(i)!=string.charAt(string.length()-i-1))
-                return false;
-        }
-        return true;
-    }
+    }    
     public static void main(String[] args){
         Scanner sc;
         try{
