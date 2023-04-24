@@ -1,22 +1,25 @@
 package LeetcodeDailyStreaks;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class LongestPalindromicSubSequence {
-    int longestPalindromicCount=0;
-    public int longestPalindromeSubseq(String s) {
-        StringBuilder stringBuilder=new StringBuilder();
-        this.findAllSubSequences(0, stringBuilder, s);
-        return longestPalindromicCount;
+    int dp[][];
+    public LongestPalindromicSubSequence(){
+        dp=new int[1001][1001];
     }
-    public void findAllSubSequences(int index, StringBuilder stringBuilder, String originalString){
-        if(index==originalString.length())            
-            return ;            
-        System.out.println(stringBuilder+" "+stringBuilder.reverse()+" "+stringBuilder.toString().equals(stringBuilder.reverse().toString()));
-        stringBuilder.append(originalString.charAt(index));        
-        findAllSubSequences(index+1, stringBuilder, originalString);        
-        stringBuilder.deleteCharAt(stringBuilder.length()-1);        
-        findAllSubSequences(index+1, stringBuilder, originalString);
+    public int longestPalindromeSubseq(String s) {  
+        Arrays.stream(dp).forEach(array->Arrays.fill(array, -1));
+        return s.length()-this.findAllSubSequences(dp, 0, s.length()-1, s);
+    }
+    public int findAllSubSequences(int[][] dp, int begin, int end, String string){
+        if(begin>=end)
+            return 0;
+        if(dp[begin][end]!=-1)
+            return dp[begin][end];
+        if(string.charAt(begin)==string.charAt(end))
+            return findAllSubSequences(dp, begin+1, end-1, string);        
+        return dp[begin][end]=1+Math.min(findAllSubSequences(dp, begin+1, end, string), findAllSubSequences(dp, begin, end-1, string));
     }    
     public static void main(String[] args){
         Scanner sc;
