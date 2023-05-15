@@ -3,19 +3,27 @@ package LeetcodeDailyStreaks;
 import java.util.Scanner;
 
 public class MaximumNumberofVowelsSubstringofGivenLength {
-    int countMaxVowel=0;
+    int i=0, j=0, maxVowelCount=0;
     public int maxVowels(String s, int k) {
-        for(int i=0;i<=s.length()-k;i++)            
-            countMaxVowel=Math.max(countMaxVowel, this.returnVowelCount(s.substring(i, i+k)));
-        return countMaxVowel;        
-    }
-    public int returnVowelCount(String substr){
-        int count=0;
-        for(int i=0;i<substr.length();i++){
-            if(substr.charAt(i)=='a' || substr.charAt(i)=='e' || substr.charAt(i)=='i' || substr.charAt(i)=='o' || substr.charAt(i)=='u')
-                count++;
+        int vowelCount=0;
+        while(i<=s.length()-k){
+            if((j-i+1)<=k){
+                if(this.isVowel(s, j)){
+                    vowelCount++;                
+                    maxVowelCount=Math.max(maxVowelCount, vowelCount);
+                }
+                j++;
+            }
+            else {
+                if(this.isVowel(s, i))
+                    vowelCount--;
+                i++;
+            }
         }
-        return count;
+        return maxVowelCount;        
+    }    
+    public boolean isVowel(String s, int index){
+        return (s.charAt(index)=='a' || s.charAt(index)=='e' || s.charAt(index)=='i' || s.charAt(index)=='o' || s.charAt(index)=='u')?(true):(false);
     }
     public static void main(String[] args){
         Scanner sc;
