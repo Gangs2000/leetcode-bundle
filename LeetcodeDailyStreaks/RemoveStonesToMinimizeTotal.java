@@ -23,7 +23,7 @@ public class RemoveStonesToMinimizeTotal {
             int remove=peekElement/2;
             sum-=remove;            
             peekElement-=remove;
-            priorityQueue.add(peekElement);
+            priorityQueue.add(peekElement);            
         }
         return sum;
     }    
