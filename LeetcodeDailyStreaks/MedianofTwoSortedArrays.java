@@ -19,7 +19,7 @@ public class MedianofTwoSortedArrays {
                 mergedArray[index++]=nums2[j++];                
             else if(nums1[i]==nums2[j]){
                 mergedArray[index++]=nums1[i++];                
-                mergedArray[index++]=nums2[j++];                
+                mergedArray[index++]=nums2[j++];      
             }
         }
         if(i<nums1.length)
