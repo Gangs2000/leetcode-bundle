@@ -2,23 +2,20 @@ package MemoiDPAndBackTracking;
 
 import java.util.Scanner;
 
-public class UniquePathsII {
-    int uniquePathsCount=0;
+public class UniquePathsII {    
+    int[][] cache;
     public int uniquePathsWithObstacles(int[][] obstacleGrid) {
-        backTrackingThroughGrid(obstacleGrid, 0, 0);
-        return uniquePathsCount;
-    }
-    public void backTrackingThroughGrid(int[][] grid, int x, int y){
-        if(x<0 || y<0 || x>=grid.length || y>=grid[x].length || grid[x][y]==1)
-            return ;
-        if(x==grid.length-1 && y==grid[x].length-1){
-            uniquePathsCount++;
-            return ;            
-        }        
-        grid[x][y]=1;        
-        backTrackingThroughGrid(grid, x, y+1);        //Right        
-        backTrackingThroughGrid(grid, x+1, y);        //Bottom
-        grid[x][y]=0;
+        cache=new int[obstacleGrid.length][obstacleGrid[0].length];        
+        return findAllPossiblePaths(0, 0, cache, obstacleGrid);
+    }    
+    public int findAllPossiblePaths(int i, int j, int[][] cache, int[][] grid){
+        if(i==grid.length || j==grid[i].length || grid[i][j]==1)
+            return 0;
+        if(i==grid.length-1 && j==grid[i].length-1)
+            return 1;
+        if(cache[i][j]!=0)
+            return cache[i][j];
+        return cache[i][j]=findAllPossiblePaths(i, j+1, cache, grid)+findAllPossiblePaths(i+1, j, cache, grid);
     }
     public static void main(String[] args){
         Scanner sc;
