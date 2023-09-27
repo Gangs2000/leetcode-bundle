@@ -1,4 +1,6 @@
-import Package.*;
+package Stack;
+
+import Stack.Package.*;
 public class removeElement extends Thread
 {
 	Queue queue;Stack stack;Circular_queue cir_que;

@@ -1,4 +1,4 @@
-package Package;
+package Stack.Package;
 public class Circular_queue
 {
 	private int array[];

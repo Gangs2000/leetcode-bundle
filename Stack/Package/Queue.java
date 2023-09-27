@@ -1,4 +1,4 @@
-package Package;
+package Stack.Package;
 public class Queue
 {
 	private int array[],ele,count=0;

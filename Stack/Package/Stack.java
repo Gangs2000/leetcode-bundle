@@ -1,4 +1,4 @@
-package Package;
+package Stack.Package;
 public class Stack
 {
 	private int array[],ele,count=-1;

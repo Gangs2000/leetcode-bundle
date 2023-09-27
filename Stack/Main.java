@@ -1,4 +1,6 @@
-import Package.*;
+package Stack;
+
+import Stack.Package.*;
 import java.util.Scanner;
 import java.util.InputMismatchException;
 class Main

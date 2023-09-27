@@ -1,4 +1,7 @@
-import Package.*;
+package Stack;
+
+import Stack.Package.*;
+
 class addElement extends Thread
 {
 	Queue queue;Stack stack;Circular_queue cir_que;
