@@ -7,13 +7,13 @@ public class MaximumNumberofCoinsYouCanGet {
     public int maxCoins(int[] piles) {                
         /* With Descending order run time is 113ms and beats 5.30% of Java users ( Worst approach ) */
         piles=Arrays.stream(piles).boxed().sorted(Collections.reverseOrder()).mapToInt(Integer::intValue).toArray();
-        /* With Ascending run time is 27ms and beats 98.99% of Java users ( Best approach ) */
+        /* With Ascending order run time is 27ms and beats 98.99% of Java users ( Best approach ) */
         Arrays.sort(piles);
         int leftPointer=0, rightPointer=piles.length-2;
         while(leftPointer<rightPointer){
             maxCoinsOfMine+=piles[rightPointer];
-            leftPointer++;
             rightPointer=rightPointer-2;
+            leftPointer++;            
         }            
         return maxCoinsOfMine;
     }
