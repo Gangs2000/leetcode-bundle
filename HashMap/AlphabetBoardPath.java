@@ -64,6 +64,7 @@ public class AlphabetBoardPath {
                 break;
             count++;
         }        
+        //Test
         return List.of(count, board.get(count).indexOf(currentChar));
     }
     public static void main(String[] args){
