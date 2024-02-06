@@ -6,32 +6,31 @@ import java.util.List;
 import java.util.Map;
 
 public class GroupAnagrams {
-    Map<String, List<String>> map;
-    List<List<String>> output;
+    Map<String, List<String>> mapper;
+    List<List<String>> resultList;
     public GroupAnagrams(){
-        map=new HashMap<>();
-        output=new LinkedList<>();
+        mapper=new HashMap<>();
+        resultList=new LinkedList<>();
     }
-    public List<List<String>> groupAnagrams(String[] strs) {        
+    public List<List<String>> groupAnagrams(String[] strs) {
         for(int i=0;i<strs.length;i++){
-            char[] chars=strs[i].toCharArray();
-            Arrays.sort(chars);            
-            checkCanStringBeGrouped(String.valueOf(chars), strs[i]);
-        }        
-        map.values().stream().forEach(list->output.add(list));        
-        return output;
-    }
-    public void checkCanStringBeGrouped(String sortedString, String originalString){
-        if(map.containsKey(sortedString)){
-            List<String> list=map.get(sortedString);
-            list.add(originalString);
-            map.put(sortedString, list);
+            char[] charArray=strs[i].toCharArray();
+            Arrays.sort(charArray);
+            String sortedString=Arrays.toString(charArray);
+            List<String> list;
+            if(!mapper.containsKey(sortedString)){
+                list=new LinkedList<>();
+                list.add(strs[i]);
+            }
+            else{
+                list=mapper.get(sortedString);
+                list.add(strs[i]);
+            }
+            mapper.put(sortedString, list);
         }
-        else{
-            List<String> list=new LinkedList<>();
-            list.add(originalString);
-            map.put(sortedString, list);
-        }
+        for(Map.Entry<String, List<String>> entry : mapper.entrySet())
+            resultList.add(entry.getValue());
+        return resultList;
     }
     public static void main(String[] args){
         Scanner sc;
@@ -44,6 +43,7 @@ public class GroupAnagrams {
             for(int i=0;i<length;i++)
                 strs[i]=sc.next();
             System.out.println(new GroupAnagrams().groupAnagrams(strs));
+            sc.close();
         }
         catch(Exception e){
             System.out.println("Exception occurred : "+e.getMessage());
