@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-class LongestEvenOddSubarrayWithThreshold {
+public class LongestEvenOddSubarrayWithThreshold {
     int longestCount=Integer.MIN_VALUE;
     public int longestAlternatingSubarray(int[] nums, int threshold) {
         int outerLoop=0;
