@@ -1,3 +1,5 @@
+package LeetcodeDailyStreaks;
+
 import java.util.Scanner;
 
 public class PowerOfTwo {
