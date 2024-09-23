@@ -4,6 +4,10 @@ import java.util.Scanner;
 import java.util.function.Function;
 import java.util.stream.IntStream;
 
+interface DFSTriConsumer<T1, T2, T3> {
+    void accept(T1 t1, T2 t2, T3 t3);
+}
+
 public class LexicographicalNumbers {
     List<Integer> resultList;
     StringBuilder stringBuilder;
@@ -14,9 +18,11 @@ public class LexicographicalNumbers {
     }
 
     public List<Integer> lexicalOrder(int n) {
+        DFSTriConsumer<Integer, StringBuilder, List<Integer>> consumer = (t1, t2, t3) -> this.depthFirstSearch(t1, t2,
+                t3);
         IntStream.range(1, 10).boxed()
                 .forEach(number -> {
-                    this.depthFirstSearch(n, stringBuilder.append(String.valueOf(number)), resultList);
+                    consumer.accept(n, stringBuilder.append(String.valueOf(number)), resultList);
                     stringBuilder.deleteCharAt(0);
                 });
         return resultList;
