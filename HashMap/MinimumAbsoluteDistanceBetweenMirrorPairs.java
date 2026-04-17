@@ -1,12 +1,12 @@
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.Scanner;
-import java.util.TreeSet;
 import java.util.function.Function;
 
 public class MinimumAbsoluteDistanceBetweenMirrorPairs {
-    Map<Integer, TreeSet<Integer>> indexMapper;
+    Map<Integer, List<Integer>> indexMapper;
     int minDistance = Integer.MAX_VALUE;
 
     public MinimumAbsoluteDistanceBetweenMirrorPairs() {
@@ -20,10 +20,14 @@ public class MinimumAbsoluteDistanceBetweenMirrorPairs {
             StringBuilder reversedStr = new StringBuilder(String.valueOf(nums[i]));
             Integer reversedNum = Integer.valueOf(reversedStr.reverse().toString());
             if (indexMapper.containsKey(reversedNum)) {
-                TreeSet<Integer> set = indexMapper.get(reversedNum);
-                Optional<Integer> upperIndex = Optional.ofNullable(set.higher(i));
-                if (upperIndex.isPresent())
-                    minDistance = Math.min(minDistance, Math.abs(upperIndex.get() - i));
+                List<Integer> list = indexMapper.get(nums[i]);
+                list.remove(Integer.valueOf(i));
+                list = indexMapper.get(reversedNum);
+                if (list.size() > 0) {
+                    int mostRecentIndex = list.get(0);
+                    if (mostRecentIndex > i)
+                        minDistance = Math.min(minDistance, Math.abs(mostRecentIndex - i));
+                }
             }
         }
         return minDistance == Integer.MAX_VALUE ? -1 : minDistance;
@@ -31,7 +35,7 @@ public class MinimumAbsoluteDistanceBetweenMirrorPairs {
 
     private void mapIndicies(int[] nums) {
         for (int i = 0; i < nums.length; i++) {
-            TreeSet<Integer> set = indexMapper.containsKey(nums[i]) ? indexMapper.get(nums[i]) : new TreeSet<>();
+            List<Integer> set = indexMapper.containsKey(nums[i]) ? indexMapper.get(nums[i]) : new LinkedList<>();
             set.add(i);
             indexMapper.put(nums[i], set);
         }
