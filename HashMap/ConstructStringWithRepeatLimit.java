@@ -64,7 +64,7 @@ public class ConstructStringWithRepeatLimit {
             sc.close();
         } catch (Exception e) {
             System.out.println("Exception occurred : " + e.getMessage());
-            System.out.println("Error stack trace occurred : "+ e.printStackTrace());
+            e.printStackTrace();
         }
     }
 }
