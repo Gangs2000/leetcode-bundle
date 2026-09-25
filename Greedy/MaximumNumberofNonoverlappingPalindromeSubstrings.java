@@ -41,13 +41,9 @@ public class MaximumNumberofNonoverlappingPalindromeSubstrings {
         Scanner sc;
         try {
             sc = new Scanner(System.in);
-            /*
-             * System.out.println("Enter S and K values : ");
-             * String s = sc.nextLine();
-             * int k = sc.nextInt();
-             */
-            String s = "abaccdbbd";
-            int k = 3;
+            System.out.println("Enter S and K values : ");
+            String s = sc.nextLine();
+            int k = sc.nextInt();
             BiFunction<String, Integer, Integer> biFunction = new MaximumNumberofNonoverlappingPalindromeSubstrings()::maxPalindromes;
             System.out.println(biFunction.apply(s, k));
             sc.close();
